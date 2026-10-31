@@ -1,21 +1,21 @@
-# JETLAG ZERO — Personal beta
+# JETLAG ZERO v2.0
 
-A mobile-first personal jet-lag planning app. Static files, no accounts, no backend, and no paid API.
+個人用フライト・時差ぼけ対策Webアプリ。GitHub Pagesで公開できます。
 
-## Publish with GitHub Pages
-1. Create a new **public** repository named `jetlag-zero` on GitHub.
-2. Choose **Add file → Upload files** and upload `index.html`, `sw.js`, `manifest.webmanifest`, `icon.svg` to the repository root (not the containing folder).
-3. Select **Commit changes**.
-4. Go to **Settings → Pages → Build and deployment**, select **Deploy from a branch**, branch **main**, folder **/(root)**, then **Save**.
-5. After deployment, visit `https://YOUR_USERNAME.github.io/jetlag-zero/` in Safari. Share → Add to Home Screen.
-6. Load the app online once, then test airplane mode with the page reopened.
+## v2の新機能
+- 最大6区間のフライト・経由地入力
+- 乗継時間を含めた行動タイムライン
+- 画像をブラウザで文字認識（Tesseract.js）し、空港コードを入力候補にする
+- OCR結果の確認・編集と手動修正
+- v1の保存済み直行便データの読み込み
 
-## Important limitations
-- This is an experimental general-wellness prototype, **not a validated circadian phase-response algorithm**. Flight events are heuristic and cannot guarantee jet-lag prevention.
-- The planner currently supports one direct flight segment at a time. It supports selected cities and their daylight-saving rules through Intl time zones.
-- Service worker caches the static app after its first online visit; availability in iOS offline mode depends on Safari's caching and storage policy.
-- Audio uses local Web Audio noise generation or an uploaded file. Audio while screen-locked or in the background is **not guaranteed** on iPhone.
-- MP3 uploads are held in memory during the current page session, **not permanently saved**; reselect the file after reopening.
-- Checklists and flight plans use localStorage. They can be lost if browser storage is cleared or the app is removed. No cloud backup.
-- No background push notifications. Open the app to see current recommendations.
-- For travel, always prioritize adequate sleep, hydration, safe movement and medical guidance if needed.
+## 公開方法
+GitHubリポジトリのルートに index.html / sw.js / manifest.webmanifest / icon.svg をアップロードして既存ファイルを上書きし、Commit changes。GitHub PagesのURLは同じです。ブラウザのキャッシュが残る場合は再読み込みしてください。
+
+## 制限・注意
+- OCRは **オンラインでライブラリを取得**する必要があります。読み取った画像はOCRのために外部サーバーへアップロードしない設計ですが、ライブラリはCDNから取得します。
+- OCRは空港コードを主に抽出する補助機能です。旅程表のレイアウトによって日付・時刻の自動入力に失敗するため、必ず手動確認・補完してください。
+- 対応空港はアプリ内のAIRPORTS定義にある空港のみ。未対応コードは計画作成時にエラーを表示します。
+- 機内のアドバイスは最終目的地の現地時間を基準とする一般的な目安で、精密な概日リズム最適化ではありません。
+- iOSのオフライン動作・バックグラウンド音声は実機検証が必要。OCRは機内で使う前に実行してください。
+- ブラウザ内のローカルストレージに旅程を保存します。端末・ブラウザ間の同期はありません。
